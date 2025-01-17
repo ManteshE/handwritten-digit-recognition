@@ -5,6 +5,7 @@ import numpy as np
 import logging
 from tensorflow.keras import models
 import argparse
+import matplotlib.pyplot as plt
 
 # Configure logging
 logging.basicConfig(
@@ -40,6 +41,7 @@ def predict_digit(image_path):
         image_reshaped = image_resized.reshape(1, 28, 28, 1)
         pred = np.argmax(model.predict(image_reshaped), axis=-1)
         logging.info("Prediction successful. Predicted digit: %s", pred[0])
+        plt.imshow(image_resized)
         return pred[0]
     except Exception as e:
         logging.error("Error during prediction: %s", e)
